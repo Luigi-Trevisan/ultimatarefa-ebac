@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "21595db7-d7ae-4a18-9595-7a62a4dad3be",
+		"name": "ebac-shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40100040",
+		"_collection_link": "https://grey-eclipse-742528.postman.co/workspace/API-ebac-shop~173bc647-82b6-43d5-a9d0-3da278c4a937/collection/40100040-21595db7-d7ae-4a18-9595-7a62a4dad3be?action=share&source=collection_link&creator=40100040"
+	},
+	"item": [
+		{
+			"name": "cupom-ebac",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');\r",
+							"const codigoCupom = `Ganhe10-${timestamp}`;\r",
+							"\r",
+							"pm.environment.set(\"codigoCupom\", codigoCupom);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "YWRtaW5fZWJhYzpAYWRtaW4hJmJAYyEyMDIy",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": \"{{codigoCupom}}\",\r\n \"amount\": \"10\",\r\n \"discount_type\": \"fixed_product\",\r\n \"description\": \"Cupom de desconto de teste\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://lojaebac.ebaconline.art.br/wp-json/wc/v3/coupons",
+					"protocol": "http",
+					"host": [
+						"lojaebac",
+						"ebaconline",
+						"art",
+						"br"
+					],
+					"path": [
+						"wp-json",
+						"wc",
+						"v3",
+						"coupons"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
